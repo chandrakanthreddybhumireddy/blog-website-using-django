@@ -1,0 +1,56 @@
+{% extends "app/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <style>
+        .content-section {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        .media {
+            display: flex;
+            align-items: center;
+        }
+
+        .account-img {
+            border-radius: 50%;
+            margin-right: 20px;
+        }
+
+        .media-body {
+            flex: 1;
+        }
+
+        .account-heading {
+            font-size: 1.5rem;
+            color: #333;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .text-secondary {
+            color: #777;
+        }
+
+        /* Add more styles as needed */
+    </style>
+
+    <div class="content-section">
+        <div class="media">
+            <img class="rounded-circle account-img" style="width: 80px; height: 80px" src="{{ user.profile.image.url }}">
+            <div class="media-body">
+                <h2 class="account-heading">{{ user.username }}</h2>
+                <p class="text-secondary">{{ user.email }}</p>
+                <p class="text-secondary"><strong>Bio:</strong> {{ user.profile.bio }}</p>
+                <p class="text-secondary"><strong>Date of Birth:</strong> {{ user.profile.date_of_birth }}</p>
+                <!-- Add more fields as needed -->
+            </div>
+        </div>
+        <!-- FORM HERE -->
+    </div>
+{% endblock content %}

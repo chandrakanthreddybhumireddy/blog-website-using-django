@@ -1,0 +1,81 @@
+<!--{% extends "app/base.html" %}-->
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <style>
+        .login-form {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            background-color: #ffffff;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .btn-outline-info {
+            color: #17a2b8;
+            background-color: #fff;
+            border-color: #17a2b8;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .btn-outline-info:hover {
+            color: #fff;
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+        }
+
+        .border-top {
+            margin-left: 10rem;
+        }
+
+        .content-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 90vh;
+        }
+
+        legend {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        input.form-control {
+            height: 30px;
+        }
+
+        button.btn {
+            height: 30px;
+        }
+
+        small.text-muted {
+            display: block;
+            margin-top: 10px;
+        }
+    </style>
+
+    <div class="content-section">
+        <form method="POST" class="login-form">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4"><h1>Login Here</h1></legend>
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Login</button>
+            </div>
+        </form>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Need an account? <a class="ml-2" href="{% url 'register' %}"><button>Sign Up</button></a>
+            </small>
+        </div>
+    </div>
+{% endblock content %}

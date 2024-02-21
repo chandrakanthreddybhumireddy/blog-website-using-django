@@ -1,0 +1,175 @@
+{% extends "app/base.html" %}
+{% load static %}
+{% block content %}
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Arial', sans-serif;
+        background-color: #f8f9fa; /* Set a background color for the body */
+    }
+    .back{
+        padding-right: 0px;
+    }
+    h2{
+        padding-left: 50px;
+    }
+
+    
+
+    .media {
+        border-bottom: 1px solid #ccc;
+        padding-bottom: 15px;
+        margin-bottom: 15px;
+        background-color: #ffffff; /* Set a background color for each media item */
+        border-radius: 8px; /* Add some border-radius for a rounded look */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow for depth */
+        margin-top: 20px; /* Increase the top margin for separation */
+    }
+
+    .article-metadata {
+        display: flex;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .article-metadata img {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        margin-right: 10px;
+    }
+
+    .article-metadata a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .article-title {
+        color: #333;
+        text-decoration: none;
+    }
+
+    .article-title:hover {
+        text-decoration: underline;
+    }
+
+    .article-content {
+        color: #555;
+        line-height: 1.6;
+        padding: 20px; /* Add padding for better readability */
+    }
+    .navbar {
+        background-color: #343a40;
+        border-bottom: 1px solid #555;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0;
+    }
+
+    .navbar-brand {
+        color: #ffffff;
+        font-weight: bold;
+        font-size: 1.5rem;
+        text-decoration: none;
+        padding-left: 40px;
+    }
+
+    .navbar-toggler-icon {
+        background-color: #ffffff;
+    }
+
+    .navbar-nav {
+        display: flex;
+        align-items: center;
+    }
+
+    .navbar-nav .nav-item {
+        margin-right: 40px;
+    }
+
+    .navbar-nav .nav-link {
+        color: #ffffff;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .navbar-nav .nav-link:hover {
+        color: #007bff;
+    }
+
+    .navbar-text {
+        color: #ffffff;
+    }
+    ul {
+        list-style-type: none;
+        padding: 0; /* Optional: Remove default padding */
+        margin: 0; /* Optional: Remove default margin */
+    }
+
+    /* Style for list items (optional) */
+    li {
+        margin-bottom: 10px;
+    }
+    
+    
+    .mr-auto{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    }
+
+
+</style>
+<div class="back">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="{% url 'blog-home' %}"> Blog</a>
+      
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'blog-home' %}">Home <span class="sr-only"></span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'blog-about' %}">About</a>
+          </li>
+          {% if user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'login' %}">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'register' %}">Register</a>
+          </li>
+          {% endif %}
+        </ul>
+        <span class="navbar-text">
+          
+        </span>
+      </div>
+    </nav>
+
+    {% for post in posts %}
+    
+    
+    <article class="media content-section">
+        <div class="media-body">
+          <div class="article-metadata">
+          	<img src="{{ user.profile.image.url }}" alt="hello"/>
+            <a class="mr-2" href="#"><strong>Author : </strong>{{ post.author }}</a><hr>
+            <small class="text-muted"><strong>Pulished on :- </strong>{{ post.date_posted | date:"F d, Y" }}</small>
+          </div>
+          <h2><a class="article-title" href="#">{{ post.title }}</a></h2>
+          <p class="article-content">{{ post.content }}</p>
+        </div>
+      </article>
+    </div>
+    {% endfor %}
+{% endblock content %}

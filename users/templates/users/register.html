@@ -1,0 +1,71 @@
+<!--{% extends "app/base.html" %}-->
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <style>
+        .content-section {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            text-align: center;
+            margin-left: 25rem;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        legend {
+            font-size: 1.5rem;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .btn-outline-info {
+            width: 100%;
+            color: #17a2b8;
+            background-color: #fff;
+            border-color: #17a2b8;
+        }
+
+        .btn-outline-info:hover {
+            color: #fff;
+            background-color: #17a2b8;
+            border-color: #17a2b8;
+        }
+
+        .text-muted a {
+            color: #17a2b8;
+        }
+
+        .text-muted a:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+    <div class="content-section">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                <legend class="border-bottom mb-4">Join Today</legend>
+                {{ form|crispy }}
+            </fieldset>
+            <div class="form-group">
+                <button class="btn btn-outline-info" type="submit">Sign Up</button>
+            </div>
+        </form>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Already have an account? <a class="ml-2" href="{% url 'login' %}"><button class="btn btn-link"><button>Sign In</button></button></a>
+            </small>
+        </div>
+    </div>
+{% endblock content %}
